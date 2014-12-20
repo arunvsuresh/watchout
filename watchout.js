@@ -2,9 +2,10 @@
 var options = {
   height: 500,
   width: 500,
-  radius: 40,
+  playerRadius: 20,
   enemyNum: 5,
-  playerNum: 1
+  playerNum: 1,
+  asteroidRadius: 40
 };
 
 var enemies = [];
@@ -14,8 +15,8 @@ var gameBoard = d3.select('body').append('svg:svg')
   .attr("height", options.height).attr('class', "mars");
 
 var generatePosition = function(obj) {
-  obj.x = (Math.random() * (options.width-2*(options.radius)))+options.radius;
-  obj.y = (Math.random() * (options.height-2*(options.radius)))+options.radius;
+  obj.x = (Math.random() * (options.width-2*(options.asteroidRadius)))+options.asteroidRadius;
+  obj.y = (Math.random() * (options.height-2*(options.asteroidRadius)))+options.asteroidRadius;
   return obj;
 };
 
@@ -44,8 +45,8 @@ var setEnemies = gameBoard.selectAll('image')
                      .enter()
                      .append('image')
                      // .attr('r', options.radius)
-                     .attr('width',options.radius)
-                     .attr('height',options.radius)
+                     .attr('width',options.asteroidRadius)
+                     .attr('height',options.asteroidRadius)
                      .attr('x',function(d){return d.x;})
                      .attr('y',function(d){return d.y;})
                      .attr('xlink:href', "asteroid.png");
@@ -70,20 +71,20 @@ var createPlayer = function() {
   obj.x = options.height / 2;
   obj.y = options.width / 2;
   obj.setX = function(x) {
-    if (x < options.radius) {
-      this.x = options.radius;
-    } else if (x > options.width - options.radius) {
-      this.x = options.width - options.radius;
+    if (x < options.playerRadius) {
+      this.x = options.playerRadius;
+    } else if (x > options.width - options.playerRadius) {
+      this.x = options.width - options.playerRadius;
     } else {
       this.x = x;
     }
   };
 
   obj.setY = function(y) {
-    if (y < options.radius) {
-      this.y = options.radius;
-    } else if (y > options.height - options.radius) {
-      this.y = options.height - options.radius;
+    if (y < options.playerRadius) {
+      this.y = options.playerRadius;
+    } else if (y > options.height - options.playerRadius) {
+      this.y = options.height - options.playerRadius;
     } else {
       this.y = y;
     }
@@ -104,13 +105,12 @@ var dragPlayer = d3.behavior.drag().on('drag', function(d){
   d.moveRelative(d3.event.dx, d3.event.dy);
 });
 
-var setPlayer = gameBoard.selectAll('player').data(player).enter().append('svg:circle').attr('r',options.radius).attr('fill','red').attr('cx',function(d){return d.x;}).attr('cy',function(d){return d.y;}).attr('class','player').call(dragPlayer);
+var setPlayer = gameBoard.selectAll('player').data(player).enter().append('svg:circle').attr('r',options.playerRadius).attr('fill','red').attr('cx',function(d){return d.x;}).attr('cy',function(d){return d.y;}).attr('class','player').call(dragPlayer);
 
 var movePlayer = function(){
   gameBoard.selectAll('circle').attr('cx',function(d){return d.x;}).attr('cy',function(d){return d.y;});
 };
-setInterval(movePlayer,50);
-// player[0].call(dragPlayer);
+setInterval(movePlayer, 50);
 
 
 
