@@ -10,7 +10,9 @@ Feel free to use it if you like. */
 }
 
 .asteroid {
-  background-color: red;
   background-image: url("asteroid.png");
   background-size :cover;
+}
+
+.player {
 }
