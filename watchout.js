@@ -3,6 +3,7 @@ var options = {
   height: 500,
   width: 500,
   playerRadius: 20,
+<<<<<<< HEAD
   asteroidRadius: 40,
   enemyNum: 10,
   playerNum: 1
@@ -13,6 +14,13 @@ var highestScore = 0;
 var collisionCount = 0;
 var prevCollision = false;
 
+=======
+  enemyNum: 5,
+  playerNum: 1,
+  asteroidRadius: 40
+};
+
+>>>>>>> 36d0e4bb07880b60e88b68826f18aba75bb03258
 var enemies = [];
 var player = [];
 var gameBoard = d3.select('body').append('svg:svg')
@@ -20,8 +28,13 @@ var gameBoard = d3.select('body').append('svg:svg')
   .attr("height", options.height).attr('class', "mars");
 
 var generatePosition = function(obj) {
+<<<<<<< HEAD
   obj.x = (Math.random() * (options.width - (options.asteroidRadius)));
   obj.y = (Math.random() * (options.height - (options.asteroidRadius)));
+=======
+  obj.x = (Math.random() * (options.width-2*(options.asteroidRadius)))+options.asteroidRadius;
+  obj.y = (Math.random() * (options.height-2*(options.asteroidRadius)))+options.asteroidRadius;
+>>>>>>> 36d0e4bb07880b60e88b68826f18aba75bb03258
   return obj;
 };
 
@@ -33,6 +46,10 @@ var findNewPositions = function() {
 };
 
 var createEnemies = function(enemyNum) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 36d0e4bb07880b60e88b68826f18aba75bb03258
   for (var i = 0; i < enemyNum; i++) {
     var obj = {};
     obj.id = i;
@@ -48,17 +65,26 @@ var setEnemies = gameBoard.selectAll('image')
                      .data(enemies)
                      .enter()
                      .append('image')
+<<<<<<< HEAD
                      // .attr('r', options.asteroidRadius)
+=======
+                     // .attr('r', options.radius)
+>>>>>>> 36d0e4bb07880b60e88b68826f18aba75bb03258
                      .attr('width',options.asteroidRadius)
                      .attr('height',options.asteroidRadius)
                      .attr('x',function(d){return d.x;})
                      .attr('y',function(d){return d.y;})
+<<<<<<< HEAD
                      .attr('xlink:href', "asteroid.png")
                      .attr('class','asteroid');
+=======
+                     .attr('xlink:href', "asteroid.png");
+>>>>>>> 36d0e4bb07880b60e88b68826f18aba75bb03258
                      // .style('color', 'red');
 
                      //.append('image')
                      //.attr('class', "asteroid");
+<<<<<<< HEAD
 var moveEnemies = function(element) {
                      element
                      .data(findNewPositions, function(d){
@@ -75,6 +101,19 @@ var moveEnemies = function(element) {
 };
 
 moveEnemies(gameBoard.selectAll('image'));
+=======
+var moveEnemies = function() {
+          gameBoard.selectAll('image')
+                     .data(findNewPositions, function(d){
+                      return d.id;})
+                     .transition()
+                     .duration(1000)
+                     .attr('x',function(d){return d.x;})
+                     .attr('y',function(d){return d.y;});
+};
+
+setInterval(moveEnemies,1000);
+>>>>>>> 36d0e4bb07880b60e88b68826f18aba75bb03258
 
 var createPlayer = function() {
   var obj = {};
@@ -113,12 +152,16 @@ createPlayer();
 
 var dragPlayer = d3.behavior.drag().on('drag', function(d){
   d.moveRelative(d3.event.dx, d3.event.dy);
+<<<<<<< HEAD
 
   gameBoard.selectAll('circle').attr('cx',function(d){return d.x;}).attr('cy',function(d){return d.y;});
+=======
+>>>>>>> 36d0e4bb07880b60e88b68826f18aba75bb03258
 });
 
 var setPlayer = gameBoard.selectAll('player').data(player).enter().append('svg:circle').attr('r',options.playerRadius).attr('fill','red').attr('cx',function(d){return d.x;}).attr('cy',function(d){return d.y;}).attr('class','player').call(dragPlayer);
 
+<<<<<<< HEAD
 
 var collisions = function() {
   var collision = false;
@@ -162,6 +205,12 @@ var scoreBoard = function() {
 };
 
 setInterval(scoreBoard, 150);
+=======
+var movePlayer = function(){
+  gameBoard.selectAll('circle').attr('cx',function(d){return d.x;}).attr('cy',function(d){return d.y;});
+};
+setInterval(movePlayer, 50);
+>>>>>>> 36d0e4bb07880b60e88b68826f18aba75bb03258
 
 
 

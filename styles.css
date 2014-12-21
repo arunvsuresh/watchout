@@ -12,6 +12,7 @@ Feel free to use it if you like. */
 .asteroid {
   background-image: url("asteroid.png");
   background-size :cover;
+<<<<<<< HEAD
   /*-webkit-animation: spin 4s infinite linear;
    -webkit-animation:spin 4s linear infinite;
     -moz-animation:spin 4s linear infinite;
@@ -28,3 +29,9 @@ transform-origin: 50% 50% 0;
   100% {
     -webkit-transform: rotate(360deg); } }
 
+=======
+}
+
+.player {
+}
+>>>>>>> 36d0e4bb07880b60e88b68826f18aba75bb03258
